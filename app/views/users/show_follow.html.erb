@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row" style="width: 100%; margin: 50px auto;">
+		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">フォロー中</h4>
+	</div>
+</div>
+<div class="show-container" style="width:40%; margin: 20px auto;">
+<table class="table">
+	<thead>
+		<% @user.followings.each do |user| %>
+		<tr>
+			<th><%= attachment_image_tag user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></th>
+		</tr>
+	</thead>
+			<tbody>
+				<tr>
+					<td><strong><%= @user.name %></strong></td>
+				</tr>
+				<tr>
+					<td><%= @user.profile %></td>
+				</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>

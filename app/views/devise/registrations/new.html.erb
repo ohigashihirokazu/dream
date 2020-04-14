@@ -1,33 +1,43 @@
-<h2>Sign up</h2>
+<div class="container">
+  <div class="row" style="width: 100%; margin: 50px auto;">
+    <h4 style="margin-bottom: 20px; border-left: 2px solid #2D6F4C; padding: 10px;">新規登録画面</h4>
+  </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+<div class="login-container" style="width:40%; margin: 20px auto;">
+<div class="form-group has-icon">
+    <%= f.label :Name %>
+    <p class="control has-icons-left">
+    <%= f.text_field :name, aautofocus: true, class:"form-control", id:"inputName", placeholder:"名前" %>
+  </p>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="form-group has-icon">
+    <%= f.label :email %>
+    <p class="control has-icons-left">
+    <%= f.email_field :email, class:"form-control", id:"inputEmail", placeholder:"メールアドレス" %>
+  </p>
   </div>
 
-  <div class="field">
+<div class="form-group has-icon">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off", class:"form-control", id:"inputPassword", placeholder:"パスワード" %>
+  </p>
   </div>
 
-  <div class="field">
+<div class="form-group has-icon">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", id:"inputConfirmPassword", placeholder:"パスワード確認" %>
+  </p>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録", class:"btn btn-lg btn-block btn-base-1 mt-20"%>
   </div>
 <% end %>
 

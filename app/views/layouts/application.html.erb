@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Dream</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Dream</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
-</html>
+<body>
+  <nav class="navbar is-warning">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "navber-item" do %>
+    <hi class="title is-4" stile="font-family: cursive;">D-Connect</hi>
+    <% end %>
+    <div class="navbar-burger buger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <% if user_signed_in? %>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-item">
+      <%= link_to 'Dream', dreams_path, class: "navbar-item buttun is-warning is-light" %>
+    </div>
+    <div class="navbar-item">
+      <%= link_to 'Dream Post', new_dream_path, class: "navbar-item buttun is-warning is-light" %>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <%= link_to 'User', users_path, class: "navbar-item buttun is-warning is-light" %></p>
+            <p class="control">
+              <%= link_to 'My Page', user_path(current_user), class: "navbar-item buttun is-warning is-light" %></p>
+              <p class="control">
+                <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "navbar-item buttun is-warning is-light" %></p>
+              </div>
+            </div>
+          </div>
+          <% else %>
+          <div id="navbarExampleTransparentExample" class="navbar-menu">
+            <div class="navbar-item">
+              <%= link_to 'Dream', dreams_path, class: "navbar-item buttun is-warning is-light" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to 'User', users_path, class: "navbar-item buttun is-warning is-light" %>
+            </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="field is-grouped">
+                  <p class="control">
+                    <%= link_to 'Log In', new_user_session_path, class: "navbar-item buttun is-warning is-light" %></p>
+                    <p class="control">
+                      <%= link_to 'Sign Up', new_user_registration_path, class: "navbar-item buttun is-warning is-light" %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </nav>
+        <%= yield %>
+        <%= render "layouts/footer" %>
+      </body>
+ </html>
+

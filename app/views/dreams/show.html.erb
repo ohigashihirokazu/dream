@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="row" style="width: 100%; margin: 50px auto;">
+		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">Dream Details</h4>
+	</div>
+</div>
+<div class="show-container" style="width:65%; margin: 20px auto;">
+	<%= attachment_image_tag @dream, :image, fallback: "no_image.jpg", style:"width:30%; height:30%; margin-left:35%; margin-bottom: 20px;" %>
+	<table class="table is-narrow">
+		<tr>
+			<th>Title</th>
+			<td><%= simple_format @dream.title %></td>
+		</tr>
+	</table>
+	<table class="table is-narrow">
+		<tr>
+			<th>Introduction</th>
+			<td><%= simple_format @dream.body %></td>
+		</tr>
+	</table>
+	<% if @dream.user == current_user %>
+	<%= link_to "編集する", edit_dream_path(@dream), class: "btn btn-primary" %>
+	<% end %>
+
+	<div class="text-right" style="margin-right: 20%;">
+		<% if @dream.favorited_by?(current_user) %>
+		<%= link_to dream_favorites_path(@dream), method: :delete do %>
+		<i class="fa fa-heart" aria-hidden="true" style="color: darkorange;"></i>
+		<%= @dream.favorites.count %> いいね
+		<% end %>
+		<% else %>
+		<%= link_to dream_favorites_path(@dream), method: :post do %>
+		<i class="fa fa-heart-o" aria-hidden="true"></i>
+		<%= @dream.favorites.count %> いいね
+		<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div class="container" style="width:40%; margin: 20px auto;">
+	<h2>コメントする</h2>
+	<%= form_for [@dream, @dream_comment] do |f| %>
+	<%= f.text_area :comment, rows:'5', class: "form-control" %>
+	<%= f.submit "送信", class: "btn-flat-dashed-filled pull-right" %>
+	<% end %>
+
+<h2>コメント一覧</h2>
+<% @dream.dream_comments.each do |dream_comment| %>
+<%= dream_comment.user.name %>
+<%= dream_comment.created_at.strftime('%Y/%m/%d') %>
+<%= dream_comment.comment %>
+<% end %>
+</div>

@@ -15,48 +15,74 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "bulma";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
 
  .toppage-mainvisual-title {
   width: 100%;
   height: 300px;
-  background-image: url(ster.jpg);
+  background-image: image-url(ster.jpg);
   background-size: cover;
   font-family:  'arial black',serif;
   background-position: center;
   text-align: center;
   padding-top: 105px;
+  font-size: 50px;
+  border-bottom: 10px solid #FFFFBB;
+  border-top: 10px solid #FFFFBB;
 }
 
 .toppage-mainvisual-subtitle {
   width: 100%;
-  height: 150px;
-  background-image: url(peple.jpg);
-  background-position: center;
-  background-size: cover;
+  height: 300px;
   text-align: center;
-  padding-bottom: 90px;
+  padding-top: 80px;
+  padding-bottom: 200px;
+  font-size: 30px;
+  line-height: 1.8;
+  background-color: #FFFFBB;
+}
+
+.toppage-mainvisual-subtitle2 {
+  width: 100%;
+  text-align: center;
+  padding-top: 105px;
+  font-size: 25px;
+  line-height: 1.7;
+  background: linear-gradient(transparent 98%, #ffff66 98%);
 }
 
 .toppage-intro {
 	text-align: center;
+  font-size: 30px;
+  font-family: 'arial black',serif;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  border-bottom: 10px solid #FFFFBB;
 }
 
 .toppage-subintro {
 	text-align: center;
+  font-size: 30px;
+  line-height: 1.7;
 }
 
 .toppage-item {
 	width: 1000px;
-    padding: 30px 0 90px 0;
-    margin: 0 auto;
+  padding: 30px 0 90px 0;
+  margin: 0 auto;
+  font-size: 20px;
+  font-family:  'arial black',serif;
+  margin-top: 80px;
 }
 
 .item {
 	float: left;
-    width: 300px;
-    margin-right: 10px;
-    text-align: center;
-    margin-left: 10px;
+  width: 300px;
+  margin-right: 10px;
+  text-align: center;
+  margin-left: 20px;
 }
 
 .item-title {
@@ -69,13 +95,93 @@
 
 .item-title::after {
 	content: "";
-    display: block;
-    width: 120px;
-    height: 3px;
-    margin: 8px auto 0 auto;
-    background-color: #EC715F;
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin: 8px auto 0 auto;
+  background-color: #EC715F;
 }
 
 .toppage-login {
 	text-align: center;
+  font-size: 30px;
+  font-family:  'arial black',serif;
+  margin-bottom: 30px;
 }
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.list li .text {
+  text-align: center;
+  width: 55%;
+  padding: 0 20px;
+}
+
+.list li {
+  display: flex;
+  align-items:center;
+  flex-basis: 48%;
+  border: 1px solid #ddd;
+  margin-bottom: 6%;
+  width: 48%;
+}
+
+.dream-title {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
+  margin-top: 30px;
+  word-break: break-word;
+}
+
+.name {
+  font-size: 20px;
+  text-align: right;
+  padding-top: 60px;
+}
+
+.btn-gradient-flat {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #FFF;
+  background-image: linear-gradient(#67c5ff 0%, #67c5ff 100%);
+  transition: .4s;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.btn-gradient-flat:hover {
+  background-image: linear-gradient(#67c5ff 0%, #67ceff 70%);
+}
+
+
+.btn-flat-simple {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  text-decoration: none;
+  color: #00BCD4;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.btn-flat-simple:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+footer {
+  height: 80px;
+  background-color: #FFD700;
+}
+

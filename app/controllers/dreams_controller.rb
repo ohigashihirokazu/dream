@@ -1,23 +1,27 @@
 class DreamsController < ApplicationController
 
-	def index
+
+	def new
 		@dream = Dream.new
-		@dreams = Dream.all
 	end
 
 	def create
-		@dream = Dream.new(dream_params)
-		@dream.user_id = current_user.id
+		@dream = current_user.dreams.build(dream_params)
 		if @dream.save
-			redirect_back(fallback_location: users_path)
+			redirect_to dream_path(@dream)
 		else
-			render "index"
+			render "new"
+		end
 	end
-end
+
+	def index
+		@dreams = Dream.all
+	end
 
 	def show
-		@dream = Dream.new
 		@dream = Dream.find(params[:id])
+		@dream_comments = @dream.dream_comments
+		@dream_comment = DreamComment.new
 	end
 
 	def edit
@@ -30,20 +34,19 @@ end
 			redirect_to dream_path
 		else
 			render "edit"
+		end
 	end
-end
 
 	def destroy
-		@dream = Dream.find(params[:id])
-		@dream.destroy
-		redirect_to dream_path
+		dream = Dream.find(params[:id])
+		dream.destroy
+		redirect_to dreams_path(dream.user)
 	end
 
 
-private
+	private
 
-def dream_params
-	params.require(:dream).permit(:title, :body)
-end
-
+	def dream_params
+		params.require(:dream).permit(:title, :body, :image)
+	end
 end

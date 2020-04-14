@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row" style="width: 100%; margin: 50px auto;">
+		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">Dream Edit</h4>
+	</div>
+	<div class="edit-container" style="width:65%; margin: 20px auto;">
+		<%= form_for @dream do |f| %>
+		<div class="text-right">
+			<%= link_to "削除する",dream_path(@dream), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger destroy_dream_#{@dream.id}" %>
+		</div>
+		<div class="field">
+			<%= f.label :TITLE %>
+			<%= f.text_field :title, class: "input" %>
+		</div>
+
+		<div class="field">
+			<%= f.label :INTRODUCTION %>
+			<%= f.text_area :body, class: "textarea" %>
+		</div>
+
+		<div class="field">
+			<%= f.label :PICTURE %>
+			<%= f.attachment_field :image, class: "input" %>
+		</div>
+
+		<div class="text-left">
+			<%= f.submit '投稿', class: "btn btn-success" %>
+		</div>
+	</div>
+	<% end %>
+</div>

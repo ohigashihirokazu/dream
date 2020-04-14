@@ -1,55 +1,75 @@
-<%= render 'layouts/header' %>
 <div class="container">
 	<div class="row" style="width: 100%; margin: 50px auto;">
-		<h4 style="margin-bottom: 20px; border-left: 2px solid #2D6F4C; padding: 10px;">マイページ</h4>
-	</div>
-	<div class="row">
-		<div class="text-center">
-			<tr>
-				<th><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%></th>
-			</tr>
-			<tr>
-				<th style=“background-color: #DAD7D7; border-bottom: 1px solid #fff;“>氏名</th>
-				<td><%= current_user.name %></td>
-			</tr>
-			<tr>
+		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">My Page</h4>
 	</div>
 </div>
-
-
-	<%= form_for(@dream, url: '/dreams') do |f| %>
-	<% if @dream.errors.any? %>
-	<div class="error_explanation">
-		<h3><%= pluralize(dream.errors.count, "error") %> prohibited this obj from being saved:</h3>
-		<ul>
-			<% dream.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-			<% end %>
-		</ul>
-	</div>
-	<% end %>
-	<div class="row">
-		<h3 class="dream-post">夢を投稿しよう</h3>
-		<div class="field row">
-			<h4><u>Title</u></h4>
-			<%= f.text_field :title, class: "col-xs-12", id: "inputTitle" %>
+<div class="show-container" style="width:40%; margin: 20px auto; ">
+	<table class="table">
+		<div class="mypage">
+		<thead>
+			<tr>
+				<th><%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", class: "profile_image is-rounded" %></th>
+				<th><% unless current_user == @user %>
+					<% if current_user.following?(@user) %>
+					<%= form_for(current_user.relationships.find_by(follow_id: @user.id), html: { method: :delete }) do |f| %>
+					<%= hidden_field_tag :follow_id, @user.id %>
+					<%= f.submit 'フォロー中', class: "btn-gradient-flat" %>
+					<% end %>
+					<% else %>
+					<%= form_for(current_user.relationships.build) do |f| %>
+					<%= hidden_field_tag :follow_id, @user.id %>
+					<%= f.submit 'フォローする', class: "btn-flat-simple" %>
+					<% end %>
+					<% end %>
+					<% end %></th>
+					<th><% if @user.id == current_user.id %>
+						<%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
+						<% end %>
+					</th>
+				</tr>
+			</thead>
+		</div>
+			<tbody>
+				<tr>
+					<td><strong><%= @user.name %></strong></td>
+				</tr>
+				<tr>
+					<td><%= @user.profile %></td>
+				</tr>
+				<tr><% @user ||= current_user %>
+					<div class="stats">
+						<td><strong id="following" class="stat">
+							<%= @user.followings.count %>
+						</strong>
+						<a><%= link_to "フォロー", following_user_path(@user) %></a>
+						<strong id="followers" class="stat">
+							<%= @user.followers.count %>
+						</strong>
+						<a><%= link_to "フォロワー", followers_user_path(@user) %>
+						</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="container" style="width:40%; margin: 20px auto; padding-top: 80px;">
+			<div class="text-center">
+				<h2 style="border-bottom: 2px solid #FF4F02;"> My Post</h2>
+				<% @user.dreams.each do |dream| %>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Date & Title</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><%= dream.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
+							<td><%= link_to dream.title, dream_path(dream.id) %></td>
+						</tr>
+					</tbody>
+				</table>
+				<% end %>
+				<%= link_to "TOPに戻る", root_path %>
+			</div>
 		</div>
 
-		<div class="field row">
-			<h4><u>Option</u></h4>
-			<%= f.text_area :body, class: "col-xs-12 book_body" %>
-		</div>
-
-		<div class="actions row">
-			<%= f.submit class: "btn-square-little-rich col-xs-12" %>
-		</div>
-		<% end %>
-	</div>
-
-<% @dreams.each do |dream| %>
-<%= dream.title %>
-<%= dream.body %>
-<% end %>
-
-<%= link_to "TOPPAGE", root_path %>
-</div>
