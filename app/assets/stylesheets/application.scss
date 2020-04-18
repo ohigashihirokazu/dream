@@ -22,7 +22,7 @@
  .toppage-mainvisual-title {
   width: 100%;
   height: 300px;
-  background-image: image-url(ster.jpg);
+  background-image: image-url("ster.jpg");
   background-size: cover;
   font-family:  'arial black',serif;
   background-position: center;
@@ -183,5 +183,7 @@
 footer {
   height: 80px;
   background-color: #FFD700;
+  text-align: center;
+  padding-top: 30px;
 }
 

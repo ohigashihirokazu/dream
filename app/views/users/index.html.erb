@@ -1,6 +1,6 @@
 <style>
  th {
- 	background: #A9A9A9;
+ 	background: #FFFFBB;
  	padding-bottom: 50px;
  }
 </style>
@@ -15,7 +15,7 @@
 		<thead>
 			<% @users.each do |user| %>
 			<tr>
-				<th><%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", class: "profile_image is-rounded" %></th>
+				<th><%= attachment_image_tag user, :profile_image,  size: "120x100", fallback: "no_image.jpg", class: "profile_image is-rounded" %></th>
 				<th><% unless current_user == user %>
 					<% if current_user.following?(user) %>
 					<%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
