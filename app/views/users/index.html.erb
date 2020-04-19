@@ -1,8 +1,7 @@
 <style>
- th {
- 	background: #FFFFBB;
- 	padding-bottom: 50px;
- }
+th {
+	background: #FFFFBB;
+}
 </style>
 
 <div class="container">
@@ -12,10 +11,10 @@
 </div>
 <div class="show-container" style="width:40%; margin: 20px auto;">
 	<table class="table">
+		<% @users.each do |user| %>
 		<thead>
-			<% @users.each do |user| %>
 			<tr>
-				<th><%= attachment_image_tag user, :profile_image,  size: "120x100", fallback: "no_image.jpg", class: "profile_image is-rounded" %></th>
+				<th><%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", class: "profile_image is-rounded" %></th>
 				<th><% unless current_user == user %>
 					<% if current_user.following?(user) %>
 					<%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
@@ -26,22 +25,20 @@
 					<%= form_for(current_user.relationships.build) do |f| %>
 					<%= hidden_field_tag :follow_id, user.id %>
 					<%= f.submit 'フォローする', class: "btn-flat-simple " %>
-				</td>
-				<% end %>
-				<% end %>
-				<% end %>
-					</th>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><strong><%= link_to user.name, user_path(user) %></strong></td>
-				</tr>
-				<tr>
-					<td><%= user.profile %></td>
-				</tr>
-				</tbody>
-				<% end %>
-			</table>
-		</div>
+					<% end %>
+					<% end %>
+					<% end %>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong><%= link_to user.name, user_path(user) %></strong></td>
+			</tr>
+			<tr>
+				<td><%= user.profile %></td>
+			</tr>
+		</tbody>
+		<% end %>
+	</table>
+</div>

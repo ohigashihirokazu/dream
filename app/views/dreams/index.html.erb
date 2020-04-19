@@ -5,6 +5,10 @@
 </div>
 <div class="container">
 	<div class="row" style="width: 100%;>
+	<%= form_tag(search_dreams_path,:method => 'get') do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag 'Search', :title => nil %>
+	<% end %>
 	<div class="a"><%# コメントアウト　%>
 		<ul class="list">
 			<% @dreams.each do |dream| %>

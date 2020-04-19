@@ -69,6 +69,7 @@ gem "refile-mini_magick"
 gem 'rename'
 gem 'bulma-rails'
 gem 'font-awesome-sass', '~> 5.4.1'
+gem 'pry-byebug', group: :development
 
 gem 'dotenv-rails'
 group :production do

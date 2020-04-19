@@ -43,6 +43,9 @@ class DreamsController < ApplicationController
 		redirect_to dreams_path(dream.user)
 	end
 
+	def search
+		@dreams = Dream.search(params[:search])
+	end
 
 	private
 
