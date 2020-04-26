@@ -2,16 +2,15 @@
 	<div class="row" style="width: 100%; margin: 50px auto;">
 		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">Dream List</h4>
 	</div>
-</div>
-<div class="container">
-	<div class="row" style="width: 100%;>
-	<%= form_tag(search_dreams_path,:method => 'get') do %>
-	<%= text_field_tag :search %>
-	<%= submit_tag 'Search', :title => nil %>
-	<% end %>
-	<div class="a"><%# コメントアウト　%>
+	<div class="row" style="width: 100%;">
+		<div class="search">
+			<%= form_tag(search_dreams_path,:method => 'get') do %>
+			<%= text_field_tag :search %>
+			<%= submit_tag '検索', :title => nil %>
+			<% end %>
+		</div>
 		<ul class="list">
-			<% @dreams.each do |dream| %>
+			<% @dreams.reverse.each do |dream| %>
 			<li>
 				<div class="img">
 					<figure>
@@ -28,3 +27,4 @@
 		</ul>
 	</div>
 </div>
+<%= render "layouts/pagetop" %>

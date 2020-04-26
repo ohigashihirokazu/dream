@@ -20,7 +20,6 @@
 	<% if @dream.user == current_user %>
 	<%= link_to "編集する", edit_dream_path(@dream), class: "btn btn-primary" %>
 	<% end %>
-
 	<div class="text-right" style="margin-right: 20%;">
 		<% if @dream.favorited_by?(current_user) %>
 		<%= link_to dream_favorites_path(@dream), method: :delete do %>
@@ -35,18 +34,32 @@
 		<% end %>
 	</div>
 </div>
-
-<div class="container" style="width:40%; margin: 20px auto;">
+<div class="container" style="width:50%; margin: 20px auto;">
 	<h2>コメントする</h2>
 	<%= form_for [@dream, @dream_comment] do |f| %>
 	<%= f.text_area :comment, rows:'5', class: "form-control" %>
-	<%= f.submit "送信", class: "btn-flat-dashed-filled pull-right" %>
+	<%= f.submit "送信", class: "btn btn-primary pull-right" %>
 	<% end %>
-
-<h2>コメント一覧</h2>
-<% @dream.dream_comments.each do |dream_comment| %>
-<%= dream_comment.user.name %>
-<%= dream_comment.created_at.strftime('%Y/%m/%d') %>
-<%= dream_comment.comment %>
-<% end %>
 </div>
+<div class="container" style="width:70%; margin: 20px auto;">
+	<h2 class="comment">コメント一覧</h2>
+	<% @dream.dream_comments.reverse.each do |dream_comment| %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th><%= link_to dream_comment.user.name, "/users/#{dream_comment.user_id}" %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%= dream_comment.created_at.strftime('%Y/%m/%d') %></td>
+				<td><%= dream_comment.comment %></td>
+				<td><% if dream_comment.user == current_user %>
+					<%= link_to "Destroy",dream_dream_comments_path(@dream.id,dream_comment.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger pull-right destroy_dream_comment#{@dream.id}" %></td>
+			<% end %>
+			</tr>
+		</tbody>
+		<% end %>
+	</table>
+</div>
+<%= render "layouts/pagetop" %>

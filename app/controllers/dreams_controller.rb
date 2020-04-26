@@ -16,6 +16,7 @@ class DreamsController < ApplicationController
 
 	def index
 		@dreams = Dream.all
+		@dreams = Dream.search(params[:search])
 	end
 
 	def show
@@ -45,6 +46,7 @@ class DreamsController < ApplicationController
 
 	def search
 		@dreams = Dream.search(params[:search])
+		render "index"
 	end
 
 	private

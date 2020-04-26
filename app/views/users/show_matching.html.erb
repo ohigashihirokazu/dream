@@ -6,7 +6,7 @@
 
 <div class="container">
 	<div class="row" style="width: 100%; margin: 50px auto;">
-		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">フォロー中</h4>
+		<h4 style="margin-bottom: 20px; border-left: 2px solid #FF4F02; padding: 10px;">マッチング中</h4>
 	</div>
 </div>
 <div class="show-container" style="width:40%; margin: 20px auto;">
@@ -19,7 +19,7 @@
 	</thead>
 			<tbody>
 				<tr>
-					<td><strong><%= user.name %></strong></td>
+					<td><strong><%= link_to user.name, user_path(user) %></strong></td>
 				</tr>
 				<tr>
 					<td><%= user.profile %></td>

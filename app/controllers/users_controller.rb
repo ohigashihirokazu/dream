@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@dream = Dream.all
-		followarIdList = Relationship.select(:user_id).where(follow_id: current_user.id)
-		matchUserIdList = Relationship.select(:follow_id).where('user_id: => current_user.id', 'follow_id: => followerIdList')
-		matchUserList = User.where('id: => machUserIdList')
+		followerIdList = Relationship.select(:user_id).where(follow_id: current_user.id)
+		matchUserIdList = Relationship.select(:follow_id).where(user_id: current_user.id, follow_id: followerIdList)
+		matchUserList = User.where(id: matchUserIdList)
 	end
 
 	def edit
@@ -46,9 +46,9 @@ end
   end
 
   def matching
-	followarIdList = Relationship.select(:user_id).where(follow_id: current_user.id)
-	matchUserIdList = Relationship.select(:follow_id).where('user_id: => current_user.id', 'follow_id: => followerIdList')
-	@matchUserList = User.where('id: => machUserIdList')
+	followerIdList = Relationship.select(:user_id).where(follow_id: params[:id])
+	matchUserIdList = Relationship.select(:follow_id).where(user_id: params[:id], follow_id: followerIdList)
+	@matchUserList = User.where(id: matchUserIdList)
 	render 'show_matching'
   end
 

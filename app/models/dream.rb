@@ -17,7 +17,7 @@ class Dream < ApplicationRecord
         	if search
         		Dream.where(['title LIKE ?', "%#{search}%"])
         	else
-        		all
+        		Dream.all
         	end
         end
 end
