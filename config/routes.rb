@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homes#top'
 
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+
+  # get '/auth/:provider/callback', to: 'sessions#create'
+  # get '/logout', to: 'sessions#destroy'
 
 
   #get 'users/matching/', to: 'users#matching', param: :id

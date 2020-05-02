@@ -39,7 +39,7 @@
           <p class="control">
             <%= link_to 'User', users_path, class: "navbar-item buttun is-warning is-light" %></p>
             <p class="control">
-              <%= link_to 'My Page', user_path(current_user), class: "navbar-item buttun is-warning is-light" %></p>
+              <%= link_to 'My Page', user_path(current_user.id), class: "navbar-item buttun is-warning is-light" %></p>
               <p class="control">
                 <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "navbar-item buttun is-warning is-light" %></p>
               </div>

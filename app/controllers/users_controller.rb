@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		puts current_user
 		@user = User.find(params[:id])
 		@dream = Dream.all
 		followerIdList = Relationship.select(:user_id).where(follow_id: current_user.id)

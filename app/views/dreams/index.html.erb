@@ -14,8 +14,12 @@
 			<li>
 				<div class="img">
 					<figure>
-						<%= attachment_image_tag dream.user, :profile_image, fallback: "no_image.jpg", style:"width:200px; height:200px; "%>
+						<% if dream.user.image %>
+						<img src="<%= dream.user.image %>" style= "width:200px; height:200px; margin-left: 20px;">
+						<% else %>
+						<%= attachment_image_tag dream.user, :profile_image, fallback: "no_image.jpg", style:"width:200px; height:200px; margin-left: 20px; "%>
 					</figure>
+					<% end %>
 				</div>
 				<div class="text">
 					<p class="date"><%= dream.updated_at.strftime("%Y-%m-%d %H:%M") %></p>

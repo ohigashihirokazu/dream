@@ -9,7 +9,11 @@
 			<thead>
 				<tr>
 					<th>
+						<% if @user.image %>
+						<img src="<%= @user.image %>" style= "width:100px; height:100px;">
+						<% else %>
 						<%= attachment_image_tag @user, :profile_image,  size: "120x120", fallback: "no_image.jpg", class: "profile_image is-rounded" %>
+						<% end %>
 					</th>
 					<th>
 						<% unless current_user == @user %>
